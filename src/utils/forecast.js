@@ -20,7 +20,7 @@ const forecast = (latitude,longitude,callback) => {
     //const url = 'https://api.darksky.net/forecast/2e6b2801e9b458889d1dd970e9f8bd0a/'+latitude+','+longitude+''
     const url = `https://api.darksky.net/forecast/2e6b2801e9b458889d1dd970e9f8bd0a/${latitude},${longitude}`
     request({url:url,json:true},(err,res)=>{
-        const {error,summary,temperature:tmp,precipProbability} = (res.body,res.body.currently)
+        const {error,summary,temperature:tmp,precipProbability,windSpeed,pressure} = (res.body,res.body.currently)
         //const {error} = res.body
         if(err){
             callback('no internet connection',undefined)
@@ -31,7 +31,7 @@ const forecast = (latitude,longitude,callback) => {
             // const tmp = res.body.currently.temperature
             // const precipProbability = res.body.currently.precipProbability
             
-            callback(undefined, `${summary} ,the temperature ${tmp} degree out and ${precipProbability}% chance of rain.`)
+            callback(undefined, `${summary} ,the temperature ${tmp} degree out and ${precipProbability}% chance of rain with the wind speed is ${windSpeed} and the current pressure is ${pressure}`)
             // callback(undefined,{
             //     summary,
             //     tmp, 
